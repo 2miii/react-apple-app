@@ -24,13 +24,12 @@ const Nav = () => {
   
 
   return (
-    <NavWrapper show={show}>
+    <NavWrapper show={show.toString()}> {/* show 값을 문자열로 변환하여 전달*/}
       <Logo>
         <img
           alt="logo"
           src="/images/apple-logo.png"
-          onClick={() => ( window.location.href ="/" )}
-
+          onClick={() => (window.location.href = "/")}
         />
       </Logo>
     </NavWrapper>
@@ -45,7 +44,7 @@ const NavWrapper = styled.nav`
   left: 0;
   right: 0;
   height: 70px;
-  background-color: ${props => props.show === "true" ? "#090b13": "#090b13"} ;
+  background-color: ${(props) => props.show === "true" ? "#090b13" : "#090b13"};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +53,7 @@ const NavWrapper = styled.nav`
   z-index: 3;
 `;
 
-const Logo =styled.a`
+const Logo = styled.a`
 padding: 0;
 width: 70px;
 font-size:0;
@@ -63,7 +62,8 @@ margin-bottom:10px;
 
 img{
   display: inline-block;
-  margin-bootom:10px;
+  width:106px;
+  height:40px;
 }
 `;
 
