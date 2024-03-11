@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { styled } from "styled-components"
+import { styled } from "styled-components";
 
 
 const Nav = () => {
@@ -15,16 +15,16 @@ const Nav = () => {
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', listener);
+    window.addEventListener("scroll", listener);
   
     return () => {
-      window.removeEventListener('scroll', listener);
+      window.removeEventListener("scroll", listener);
     }
   }, [])
   
 
   return (
-    <NavWrapper show={show.toString()}> {/* show 값을 문자열로 변환하여 전달*/}
+    <NavWrapper $show={show}>
       <Logo>
         <img
           alt="logo"
@@ -44,7 +44,7 @@ const NavWrapper = styled.nav`
   left: 0;
   right: 0;
   height: 70px;
-  background-color: ${(props) => props.show === "true" ? "#090b13" : "#090b13"};
+  background-color: ${(props) => (props.show === "true" ? "#090b13" : "#090b13")};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,8 +66,5 @@ img{
   height:40px;
 }
 `;
-
-// scroll
-
 
 export default Nav;

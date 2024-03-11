@@ -8,7 +8,7 @@ function App() {
 
   return (
     <Container>
-    <Nav />
+    <Nav />    
     <Banner/>
     </Container>
   )
@@ -16,9 +16,9 @@ function App() {
 
 // 컨테이너
 const Container = styled.main`
-postion: relative;
+position: relative;
 display: block;
 top:70px;
-padding: 0 calc(3.vw + 5px);
+padding: 0 calc(3.5vw + 5px);
 `
 export default App;
