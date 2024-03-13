@@ -60,7 +60,13 @@
      background: rgba(20, 20,20, 0.5);
      transition:400ms all ease-in-out;
 }
-
+.slider_arrow-right:hover{
+     background: rgba(20, 20,20, 0.5);
+     transition:400ms all ease-in-out;
+}
+.row_posters::-webkit-scrollbar{
+     display: none;
+}
 .row_posters{
      display: flex;
      overflow-y: hidden;

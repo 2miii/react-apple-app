@@ -16,13 +16,21 @@ const Row = ({title, id, fetchUrl}) => {
     fetchMovieData();
   }, [fetchMovieData])
 
+  console.log(document.getElementById(id));
   
   return (
     <div>
       <h2>{title}</h2>
       <div className="slider">
         <div className="slider_arrow-left">
-          <span className="arrow">
+          <span className="arrow"
+            onClick={
+              ()=> {
+                document.getElementById(id).scrollLeft -= window.innerWidth -80;
+                // getElementById(id)는 app.jsx <Row id> 넣어둔 .row_posters의 요소 /innerWidth 화면내부영역
+              }
+            }
+          >
             {"<"}
           </span>
         </div>
@@ -39,7 +47,14 @@ const Row = ({title, id, fetchUrl}) => {
         </div>
         
         <div className="slider_arrow-right">
-            <span className="arrow">
+            <span className="arrow"
+            onClick={
+              ()=> {
+                document.getElementById(id).scrollLeft += window.innerWidth -80;
+                // getElementById(id)는 app.jsx <Row id> 넣어둔 .row_posters의 요소 /innerWidth 화면내부영역
+              }
+            }
+            >
               {">"}
             </span>
           </div>
