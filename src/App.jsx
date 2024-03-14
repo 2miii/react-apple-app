@@ -1,30 +1,41 @@
 
-import styled from 'styled-components';
+import {Outlet, Route, Routes} from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
-import Banner from './components/Banner';
-import Row from './components/Row';
-import requests from './api/requests';
+import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
+import DetailPage from './pages/DetailPage';
+import SearchPage from './pages/SearchPage/index ';
+
+
+const Layout = () => {
+  return(
+    <>
+      <Nav />
+
+      <Outlet />
+    </>
+  )
+}
 
 function App() {
 
   return (
-    <Container>
-    <Nav />    
-    <Banner/>
-    <Row title="Trending now" id="TN" fetchUrl ={requests.fetchTrending}/>
-    <Row title="Top Rated" id="TR" fetchUrl ={requests.fetchTopRated}/>
-    <Row title="Action Movies" id="AM" fetchUrl ={requests.fetchActionMovies}/>
-    <Row title="Comedy Movies" id="CM" fetchUrl ={requests.fetchComedyMovies}/>
-    </Container>
+    <>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<LoginPage />}/>
+          <Route path='main' element={<MainPage />}/>  {/* localhist:5173/main 경로에 가면 Login page보여줌 */}
+          <Route path=':movieId' element={<DetailPage />}/>  {/* localhist:5173/{movieId} */}
+          <Route path='search' element={<SearchPage />}/>  {/* localhist:5173/{movieId} */}
+       
+
+        </Route>
+      </Routes>
+
+    </>
   )
 }
 
-// 컨테이너
-const Container = styled.main`
-position: relative;
-display: block;
-top:70px;
-padding: 0 calc(3.5vw + 5px);
-`
+
 export default App;

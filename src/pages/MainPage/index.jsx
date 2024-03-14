@@ -1,14 +1,13 @@
-import {styled} from 'styled-components';
+import styled from 'styled-components';
 
-// import Nav from '../../components/Nav';
+import Nav from '../../components/Nav';
 import Banner from '../../components/Banner';
 import Row from '../../components/Row';
 import requests from '../../api/requests';
-
-const MainPage  = () => {
+const MainPage = () => {
   return (
-      <Container>
-      {/* <Nav />  App.jsx에서 호출되어있음   */}
+    <Container>
+      <Nav />   
       <Banner/>
       <Row title="Trending now" id="TN" fetchUrl ={requests.fetchTrending}/>
       <Row title="Top Rated" id="TR" fetchUrl ={requests.fetchTopRated}/>
@@ -25,5 +24,6 @@ display: block;
 top:70px;
 padding: 0 calc(3.5vw + 5px);
 `
+
 
 export default MainPage;

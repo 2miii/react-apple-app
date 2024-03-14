@@ -1,5 +1,4 @@
-
-export const DetailPage= () => {
+const DetailPage = () => {
   return (
     <div>DetailPage</div>
   )
