@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-import Nav from '../../components/Nav';
+// import Nav from '../../components/Nav';
 import Banner from '../../components/Banner';
 import Row from '../../components/Row';
 import requests from '../../api/requests';
 const MainPage = () => {
   return (
     <Container>
-      <Nav />   
+      {/* <Nav />   App.jsx에서 사용중이므로  */}
       <Banner/>
       <Row title="Trending now" id="TN" fetchUrl ={requests.fetchTrending}/>
       <Row title="Top Rated" id="TR" fetchUrl ={requests.fetchTopRated}/>
