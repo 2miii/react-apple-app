@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "../../api/axios";
 import "./SearchPage.css";
+import { useDebounce } from "../../hooks/useDebounce";
 
 //searchTerm가져오기
 const SearchPage = () => {
@@ -18,21 +19,23 @@ const SearchPage = () => {
   let query = useQuery();
   const searchTerm = query.get('q');
   // console.log(searchTerm);
+  const debouncedSearchTerm = useDebounce(query.get('q'),500);
+
 
   // searchTerm이 바뀔 때마다 새로 영화 데이터 가져오기 
   useEffect(() => {
-    if(searchTerm){
-      fetchSearchMovie(searchTerm);
+    if(debouncedSearchTerm ){
+      fetchSearchMovie(debouncedSearchTerm );
 
     }
-  }, [searchTerm])
+  }, [debouncedSearchTerm ])
   
   const fetchSearchMovie =async (searchTerm) => {
     try{
       const response = await axios.get(
         `/search/multi?include_adult=false&query=${searchTerm}`
       )
-      // console.log(response); 가져오는지 확인
+      console.log(response);
       setSearchResults(response.data.results);
 
     }catch (error){
