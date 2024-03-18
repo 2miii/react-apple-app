@@ -28,7 +28,7 @@ export const MovieModal = ({
           <img
             className="modal_poster-img"
             src={`${imageBasePath}${backdrop_path}`}
-            alt="modal__poster-img"
+            alt="modal_poster-img"
           />
           <div className="modal_content">
             <p className="modal_details">

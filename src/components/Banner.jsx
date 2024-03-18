@@ -4,7 +4,7 @@ import axios from '../api/axios';
 import requests from '../api/requests';
 import{useState, useEffect } from 'react';
 import './Banner.css';
-import styled from 'styled-components';
+import {styled} from 'styled-components';
 
 
 const Banner = () => {
@@ -117,7 +117,6 @@ height:100%;
 z-index:-1;
 opacity:0.65;
 border:none;
-
 `
 
 const Container = styled.div`

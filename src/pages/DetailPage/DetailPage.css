@@ -1,0 +1,25 @@
+.Detail_Wrap{
+     display:flex;
+     justify-content:center;
+     flex-direction: column;
+}
+
+.Detail_img{
+     max-width: 800px;
+     height: auto;
+}
+
+
+
+.Detail_title{
+     font-size:2rem;
+     font-weight: 800;
+}
+
+.Detail_description{
+     width:calc( 100% - 10gpx );
+     line-height: 1.3;
+     font-weight: 500;
+     font-size:1.2rem;
+     max-width:800px;
+}
