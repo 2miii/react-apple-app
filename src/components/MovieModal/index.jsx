@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */ 
 //특정 ESLint 규칙을 임시로 비활성화하는 주석
 
+import { useRef } from 'react';
 import {imageBasePath} from '../../constant'; //상수로 가져오기
 import './MovieModal.css';
 
@@ -15,10 +16,21 @@ export const MovieModal = ({
   vote_average,
   setModalOpen
 }) => {
+
+const ref = useRef(null);
+console.log(ref);
+
+useOneClickOutsitde(ref, () => {
+  setModalOpen(false);
+})
+  
+
+
+
   return (
     <div className="presentation" role="presentation">
       <div className="wrap_modal">
-        <div className="modal">
+        <div className="modal" ref={ref}>
           <span
             onClick={() => setModalOpen(false)}
             className="modal_close"

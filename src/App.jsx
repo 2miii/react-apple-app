@@ -7,7 +7,6 @@ import MainPage from './pages/MainPage';
 import DetailPage from './pages/DetailPage';
 import SearchPage from './pages/SearchPage/index ';
 
-
 const Layout = () => {
   return(
     <>
@@ -18,7 +17,6 @@ const Layout = () => {
 }
 
 function App() {
-
   return (
     <>
       <Routes>

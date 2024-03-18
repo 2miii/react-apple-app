@@ -105,8 +105,8 @@ margin-bottom:10px;
 
 img{
   display: inline-block;
-  width:106px;
-  height:40px;
+  width:100%;
+  
 }
 `;
 
