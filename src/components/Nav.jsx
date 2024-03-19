@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "../firebase";
 
 
 const Nav = () => {
 
   const [show, setShow] = useState("false");
+  const [userData, setUserData] = useState({});
+
   const [searchValue, setSearchValue] = useState('');
   const navigate = useNavigate(); 
   const {pathname} = useLocation();
@@ -57,11 +59,21 @@ const Nav = () => {
     signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result); //로그인 데이터 가져오기
+      setUserData(result.user); 
     })
     .catch((error) => {
       alert(error.message);
     })
   }
+
+  const handleLogOut = () => {
+    signOut(auth).then(()=> {
+      setUserData({});
+    }).catch((error)=>{
+      alert(error.message);
+    })
+  }
+
 
   return (
     <NavWrapper $show={show}>
@@ -89,11 +101,60 @@ const Nav = () => {
         onChange={handleChange}
         // onChange={(e)=>setSearchValue(e.target.value)} 대신 handleChange
       />
-}
-   
+      }
+  
+      {pathname !== "/" ?
+       <SignOut>
+          <UserImg src= {userData.ph0toURL} alt ={userData.displayName}/>
+          <DropDown>
+            <span onClick={ handleLogOut }>
+              Sign Out
+            </span>
+          </DropDown>
+        </SignOut>
+        : null
+        
+      }
+
     </NavWrapper>
   )
 }
+
+const DropDown = styled.div`
+  postion:absolute;
+  top:48px;
+  right:0;
+  width:100%;
+  padding: 10px;
+  background:rgb(19,19,19);
+  border:1px solid rgba(151,151,151,0.34);
+  box-shadow:rgb(0 0 0 / 50%) 0px 0px 18px 0 ;
+  font-size:14px;
+  letter-spacing:3px;
+  opacity:0;
+`
+const SignOut = styled.div`
+  position:Relative;
+  height:48px;
+  width:48px;
+  displat:flex;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+
+  &:hover{
+    ${DropDown}{
+      opacity:1;
+      transition-duration: 1s;
+  }
+  }
+`
+const UserImg = styled.img`
+  border-radius:50%;
+  width:100%;
+  height:100%;
+`
+
 
 // input
 const Input =styled.input`
