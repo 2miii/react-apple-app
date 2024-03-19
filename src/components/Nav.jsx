@@ -4,11 +4,11 @@ import { styled } from "styled-components";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "../firebase";
 
-
+const initalUserData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {};
 const Nav = () => {
 
   const [show, setShow] = useState("false");
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(initalUserData); //객체타입으로 받아주려고 JSON~
 
   const [searchValue, setSearchValue] = useState('');
   const navigate = useNavigate(); 
@@ -60,6 +60,8 @@ const Nav = () => {
     .then((result) => {
       console.log(result); //로그인 데이터 가져오기
       setUserData(result.user); 
+      //정보유지하기
+      localStorage.setItem('userData',JSON.stringify(result.user) );
     })
     .catch((error) => {
       alert(error.message);
@@ -69,6 +71,8 @@ const Nav = () => {
   const handleLogOut = () => {
     signOut(auth).then(()=> {
       setUserData({});
+      localStorage.removeItem('userData');
+
     }).catch((error)=>{
       alert(error.message);
     })
@@ -121,14 +125,14 @@ const Nav = () => {
 }
 
 const DropDown = styled.div`
-  postion:absolute;
+  position:absolute;
   top:48px;
   right:0;
   width:100%;
   padding: 10px;
   background:rgb(19,19,19);
   border:1px solid rgba(151,151,151,0.34);
-  box-shadow:rgb(0 0 0 / 50%) 0px 0px 18px 0 ;
+  box-shadow:rgb(0 0 0 / 50%) 0px 0px 18px 0px ;
   font-size:14px;
   letter-spacing:3px;
   opacity:0;
