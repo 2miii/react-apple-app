@@ -1,13 +1,19 @@
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import app from "../firebase";
 
 
 const Nav = () => {
 
   const [show, setShow] = useState("false");
   const [searchValue, setSearchValue] = useState('');
-  const navigate = useNavigate(); //
+  const navigate = useNavigate(); 
+  const {pathname} = useLocation();
+
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider(); 
 
   const listener = () => {
     if (window.scrollY > 50 ) {
@@ -31,6 +37,17 @@ const Nav = () => {
     navigate(`/search?q=${e.target.value}`); //App.jsx에서 route path='search' 경로이용하므려
   }
 
+  // 팝업
+  const handleAuth = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result); //로그인 데이터 가져오기
+    })
+    .catch((error) => {
+      alert(error.message);
+    })
+  }
+
   return (
     <NavWrapper $show={show}>
       <Logo>
@@ -40,15 +57,25 @@ const Nav = () => {
           onClick={() => (window.location.href = "/")}
         />
       </Logo>
+
+      {/* 로그인 화면에서 검색창 가리기 */}
+      {pathname === "/" ? (
+        <Login
+          onClick={handleAuth}
+        > 로그인
+        </Login>
+      ) :
+
       <Input
-          type="text"
-          className="nav_input"
-          placeholder="영화를 검색해주세요."
-          value={searchValue}
-          onChange={handleChange}
-          // onChange={(e)=>setSearchValue(e.target.value)} 대신 handleChange
-      ></Input>
-      <Login>로그인</Login>
+        type="text"
+        className="nav_input"
+        placeholder="영화를 검색해주세요."
+        value={searchValue}
+        onChange={handleChange}
+        // onChange={(e)=>setSearchValue(e.target.value)} 대신 handleChange
+      />
+}
+   
     </NavWrapper>
   )
 }
