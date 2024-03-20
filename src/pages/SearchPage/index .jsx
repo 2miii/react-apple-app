@@ -13,7 +13,7 @@ const SearchPage = () => {
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search)
-    //http://localhost:5173/search?뒤 가져오기
+    //https://localhost:5173/search?뒤 가져오기
   }
 
   let query = useQuery();
