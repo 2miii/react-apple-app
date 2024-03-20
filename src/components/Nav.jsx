@@ -109,7 +109,7 @@ const Nav = () => {
   
       {pathname !== "/" ?
        <SignOut>
-          <UserImg src= {userData.ph0toURL} alt ={userData.displayName}/>
+          <UserImg src= {userData.photoURL} alt ={userData.displayName}/>
           <DropDown>
             <span onClick={ handleLogOut }>
               Sign Out
